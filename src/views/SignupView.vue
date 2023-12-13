@@ -91,7 +91,7 @@ img {
  }
 
  .content .login-wrapper .left-img .glass {
-     width: 40%;
+     width: 30%;
      padding: 20px;
      color: #fff;
      position: absolute;
