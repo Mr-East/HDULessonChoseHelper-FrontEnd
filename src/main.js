@@ -10,6 +10,8 @@ const app = createApp(App)
 
 axios.defaults.baseURL = 'http://localhost:8080'
 
+//test
+
 app.use(router)
 
 app.mount('#app')
