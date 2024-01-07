@@ -68,12 +68,12 @@
         >
           <component :is="collapseIcon" />
         </el-icon>
-        <el-breadcrumb :separator-icon="ArrowRight">
+        <!-- <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: '/user' }"
             >用户管理</el-breadcrumb-item
           >
-        </el-breadcrumb>
+        </el-breadcrumb> -->
 
         <div
           style="
@@ -97,7 +97,7 @@
               <el-dropdown-menu>
                 <el-dropdown-item>个人信息</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item divided @click="quit">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -129,6 +129,9 @@ export default {
         this.asideWidth = this.isCollapse ? "64px" : "200px";
         this.collapseIcon = this.isCollapse ? "Expand" : "Fold";
       }
+    },
+    quit(){
+      this.$router.push("/");
     },
   },
 };

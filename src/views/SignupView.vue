@@ -9,13 +9,28 @@
           <h1>注册账号</h1>
           <div class="input-items">
             <span class="input-tips"> 邮箱 </span>
-            <input type="text" class="inputs" placeholder="输入邮箱" />
+            <input
+              type="text"
+              class="inputs"
+              placeholder="输入邮箱"
+              v-model="email"
+            />
           </div>
           <div class="input-items">
             <span class="input-tips"> 密码 </span>
-            <input type="password" class="inputs" placeholder="输入密码" />
+            <input
+              type="password"
+              class="inputs"
+              placeholder="输入密码"
+              v-model="password"
+            />
             <span class="input-tips"> 确认密码 </span>
-            <input type="password" class="inputs" placeholder="确认密码" />
+            <input
+              type="password"
+              class="inputs"
+              placeholder="确认密码"
+              v-model="repassword"
+            />
             <span class="input-tips"> 验证码 </span>
             <div class="input-container">
               <input type="code" class="inputs" placeholder="输入验证码" />
@@ -23,7 +38,7 @@
             </div>
             <!-- <div id="popup"></div> -->
           </div>
-          <button class="btn">注册</button>
+          <button class="btn" @click="signup">注册</button>
         </div>
       </div>
     </div>
@@ -31,14 +46,37 @@
 </template>
 
 <script>
+// import { post } from "@/net";
+import { ElMessage } from "element-plus";
 export default {
   data() {
     return {
       email: "",
       password: "",
+      repassword: "",
     };
   },
   methods: {
+    // signup() {
+    //   if (this.password === this.repassword) {
+    //     post(
+    //       "user/signup",
+    //       {
+    //         email: email,
+    //         password: password,
+    //       },
+    //       (message) => {
+    //         ElMessage.success(message);
+    //         router.push({ path: "/" });
+    //       }
+    //     );
+    //   } else {
+    //     ElMessage({
+    //       message: "密码不一致",
+    //       type: "warning",
+    //     });
+    //   }
+    // },
     login() {
       console.log(
         "Login clicked with email:",

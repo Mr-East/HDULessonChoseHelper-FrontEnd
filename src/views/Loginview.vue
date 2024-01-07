@@ -45,33 +45,45 @@
 <script setup>
 import { User } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { post } from "@/net";
-import { reactive } from "vue";
+import  request  from "@/net";
+import { reactive  } from "vue";
+import  router  from "@/router";
 
 const form = reactive({
   email: "",
   password: "",
 });
-
-const login = () => {
+const login = async () => {
   if (form.email === "" || form.password === "") {
     ElMessage({
       message: "邮箱或密码不能为空",
       type: "warning",
     });
-    return;
   } else {
-    post(
-      "api/auth/login",
-      {
-        email: form.email,
+ 
+    request.post("/user/loginByEmail", {
+        data: form.email,
         password: form.password,
-      },
-      (message) => {
-        ElMessage.success(message);
-        router.push({ path: "/user" });
-      }
-    );
+      })
+      .then((response) => {
+        if (response.code === "0") {
+      ElMessage({
+        message: "登录成功",
+        type: "success"
+      });
+       router.push("/user");
+    } else {
+      ElMessage({
+        message: "登录失败",
+        type: "warning"
+      });
+    }
+      })
+      .catch((error) => {
+        console.error(error); // 处理错误
+      });
+
+    
   }
 };
 </script>
