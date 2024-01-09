@@ -8,7 +8,6 @@ import UserView from '../views/UserView.vue'
 import UserClassList from "../views/UserClassList.vue";
 import UserStar from "../views/UserStar.vue";
 import UserConment from "../views/UserConment.vue";
-import UserPswChange from "../views/UserPswChange.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,11 +56,7 @@ const router = createRouter({
       name: 'classlist',
       component: UserClassList
     },
-    {
-      path: '/pswchange',
-      name: 'pswchange',
-      component: UserPswChange
-    },
+  
   ]
 })
 
