@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 创建可一个新的axios对象
 const request = axios.create({
-    baseURL: 'http://localhost:8081',   // 后端的接口地址  ip:port
+    baseURL: 'http://localhost:8081/api',   // 后端的接口地址  ip:port
     timeout: 30000
 })
 

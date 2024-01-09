@@ -8,14 +8,14 @@
       <div
         style="
           height: 60px;
-          background-color: #c1c9d6;
+          background-color: #001529;
           color: white;
           display: flex;
           align-items: center;
           justify-content: center;
         "
       >
-        <img src="@/assets/logo.png" style="width: 40px; height: 40px" alt="" />
+        <img src="@/assets/logo.jpg" style="width: 40px; height: 40px" alt="" />
 
         <span class="logo-title" style="" v-show="!isCollapse"
           >杭电选课助手</span
@@ -26,23 +26,23 @@
         :collapse="isCollapse"
         :collapse-transition="false"
         router
-        :default-active="$router.path"
+        :default-active="$route.path"
         style="border: none"
         text-color="rgba(255,255,255,0.65)"
         active-text-color="#fff"
         background-color="#001529"
       >
-        <el-menu-item index="/user">
+        <el-menu-item index="/user" @click="clickHomepage">
           <el-icon><House /></el-icon>
           <span>系统首页</span>
         </el-menu-item>
-        <el-menu-item>
+        <el-menu-item index="/star" @click="clickStar">
           <el-icon><Star /></el-icon><span>我的收藏</span>
         </el-menu-item>
-        <el-menu-item>
+        <el-menu-item index="/classlist" @click="clickClassList">
           <el-icon><Finished /></el-icon><span>模拟课表</span></el-menu-item
         >
-        <el-menu-item>
+        <el-menu-item index="/content" @click="clickContent">
           <el-icon><Comment /></el-icon><span>我的评论</span></el-menu-item
         >
         <el-sub-menu>
@@ -51,7 +51,7 @@
             <span>信息管理</span>
           </template>
           <el-menu-item>修改头像</el-menu-item>
-          <el-menu-item>修改密码</el-menu-item>
+          <el-menu-item @click="pswChange">修改密码</el-menu-item>
           <el-menu-item>修改账号</el-menu-item>
         </el-sub-menu>
       </el-menu>
@@ -87,7 +87,7 @@
           <el-dropdown class="user-dropdown" placement="bottom">
             <div style="display: flex; align-items: center; cursor: default">
               <img
-                src="@/assets/logo.png"
+                src="@/assets/logo.jpg"
                 style="width: 40px; height: 40px; padding-right: 5px"
               />
               <span>用户</span>
@@ -96,7 +96,10 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>个人信息</el-dropdown-item>
-                <el-dropdown-item>修改密码</el-dropdown-item>
+                <el-dropdown-item @click="pswChange"
+                  >修改密码</el-dropdown-item
+                >
+                
                 <el-dropdown-item divided @click="quit"
                   >退出登录</el-dropdown-item
                 >
@@ -108,11 +111,8 @@
 
       <!-- 右侧内容主体区域 -->
       <el-main>
-       
         <el-card class="box-card">
-          <div :key="o" class="text item">
-            欢迎来到杭电选课助手平台
-          </div>
+          <div :key="o" class="text item">欢迎来到杭电选课助手平台</div>
         </el-card>
       </el-main>
     </el-container>
@@ -127,15 +127,32 @@ export default {
       isCollapse: false,
       asideWidth: "200px",
       collapseIcon: "Fold",
+      centerDialogVisible: false,
     };
   },
+  components: {},
   methods: {
+    clickClassList() {
+      this.$router.push("/classlist");
+    },
+    clickContent() {
+      this.$router.push("/conment");
+    },
+    clickHomepage() {
+      this.$router.push("/user");
+    },
+    clickStar() {
+      this.$router.push("/star");
+    },
     handleCollapse() {
       {
         this.isCollapse = !this.isCollapse;
         this.asideWidth = this.isCollapse ? "64px" : "200px";
         this.collapseIcon = this.isCollapse ? "Expand" : "Fold";
       }
+    },
+    pswChange() {
+      this.$router.push("/pswchange");
     },
     quit() {
       this.$router.push("/");
@@ -157,8 +174,8 @@ export default {
   color: #fff;
 }
 .el-menu-item.is-active {
+  margin: 7px 0px;
   background-color: #40a9ff;
-  border-radius: 5px;
 }
 .el-menu-item {
   height: 60px;

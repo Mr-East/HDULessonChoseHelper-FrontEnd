@@ -60,6 +60,7 @@
 <script>
 import request from "@/net";
 import { ElMessage } from "element-plus";
+import  router  from "@/router";
 export default {
   data() {
     return {
@@ -71,6 +72,7 @@ export default {
   },
   methods: {
     signup() {
+      console.log(this.username);
       if (this.username === "" || this.email === "" || this.password === "") {
         ElMessage({
           message: "输入不能为空",
@@ -92,7 +94,7 @@ export default {
               router.push("/");
             } else {
               ElMessage({
-                message: response.errMsg,
+                message: response.errorMsg,
                 type: "warning",
               });
             }
