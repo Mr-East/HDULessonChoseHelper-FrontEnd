@@ -8,6 +8,15 @@
         <div class="form-wrapper">
           <h1>注册账号</h1>
           <div class="input-items">
+            <span class="input-tips"> 账号 </span>
+            <input
+              type="text"
+              class="inputs"
+              placeholder="输入账号"
+              v-model="username"
+            />
+          </div>
+          <div class="input-items">
             <span class="input-tips"> 邮箱 </span>
             <input
               type="text"
@@ -24,6 +33,15 @@
               placeholder="输入密码"
               v-model="password"
             />
+            
+            <!-- <span class="input-tips"> 验证码 </span>
+            <div class="input-container">
+              <input type="code" class="inputs" placeholder="输入验证码" />
+              <span class="codeBtn" id="second">获取验证码</span>
+            </div> -->
+            <!-- <div id="popup"></div> -->
+          </div>
+          <div class="input-items">
             <span class="input-tips"> 确认密码 </span>
             <input
               type="password"
@@ -31,12 +49,6 @@
               placeholder="确认密码"
               v-model="repassword"
             />
-            <span class="input-tips"> 验证码 </span>
-            <div class="input-container">
-              <input type="code" class="inputs" placeholder="输入验证码" />
-              <span class="codeBtn" id="second">获取验证码</span>
-            </div>
-            <!-- <div id="popup"></div> -->
           </div>
           <button class="btn" @click="signup">注册</button>
         </div>
@@ -46,37 +58,55 @@
 </template>
 
 <script>
-// import { post } from "@/net";
+import request from "@/net";
 import { ElMessage } from "element-plus";
 export default {
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       repassword: "",
     };
   },
   methods: {
-    // signup() {
-    //   if (this.password === this.repassword) {
-    //     post(
-    //       "user/signup",
-    //       {
-    //         email: email,
-    //         password: password,
-    //       },
-    //       (message) => {
-    //         ElMessage.success(message);
-    //         router.push({ path: "/" });
-    //       }
-    //     );
-    //   } else {
-    //     ElMessage({
-    //       message: "密码不一致",
-    //       type: "warning",
-    //     });
-    //   }
-    // },
+    signup() {
+      if (this.username === "" || this.email === "" || this.password === "") {
+        ElMessage({
+          message: "输入不能为空",
+          type: "warning",
+        });
+      } else if (this.password === this.repassword) {
+        request
+          .post("/user/register", {
+            name: this.username,
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            if (response.code === "0") {
+              ElMessage({
+                message: "注册成功",
+                type: "success",
+              });
+              router.push("/");
+            } else {
+              ElMessage({
+                message: response.errMsg,
+                type: "warning",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error(error); // 处理错误
+          });
+      } else {
+        ElMessage({
+          message: "密码不一致",
+          type: "warning",
+        });
+      }
+    },
     login() {
       console.log(
         "Login clicked with email:",

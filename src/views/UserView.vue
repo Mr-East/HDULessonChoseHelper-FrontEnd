@@ -97,7 +97,9 @@
               <el-dropdown-menu>
                 <el-dropdown-item>个人信息</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item divided @click="quit">退出登录</el-dropdown-item>
+                <el-dropdown-item divided @click="quit"
+                  >退出登录</el-dropdown-item
+                >
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -105,8 +107,13 @@
       </el-header>
 
       <!-- 右侧内容主体区域 -->
-      <el-main> 欢迎来到杭电选课助手平台
-        
+      <el-main>
+       
+        <el-card class="box-card">
+          <div :key="o" class="text item">
+            欢迎来到杭电选课助手平台
+          </div>
+        </el-card>
       </el-main>
     </el-container>
   </el-container>
@@ -130,7 +137,7 @@ export default {
         this.collapseIcon = this.isCollapse ? "Expand" : "Fold";
       }
     },
-    quit(){
+    quit() {
       this.$router.push("/");
     },
   },
