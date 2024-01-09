@@ -152,7 +152,7 @@ export default {
       }
     },
     pswChange() {
-      this.$router.push("/pswchange");
+      this.$router.push("/forgetpassword");
     },
     quit() {
       this.$router.push("/");
